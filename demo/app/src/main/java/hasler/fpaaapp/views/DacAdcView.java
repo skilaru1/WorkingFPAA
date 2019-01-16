@@ -173,7 +173,7 @@ public class DacAdcView extends DriverFragment {
                         } else {
                             long[] a = sp.get(sp.size() - 4), b = sp.get(sp.size() - 3);
                             updateGraph(new long[][]{ linspace(1, a.length, a.length), a },
-                                        new long[][]{ linspace(1, b.length, b.length), b });
+                                    new long[][]{ linspace(1, b.length, b.length), b });
                         }
 
                         return true;
@@ -272,9 +272,10 @@ public class DacAdcView extends DriverFragment {
                         } else {
                             long[] a = sp.get(sp.size() - 1);
                             double[] b = new double[a.length];
-                            for (int i = 0; i < a.length; i++) b[i] = -1*((a[i] - 5000) * 2.5 / 50.0); // b scales from a
+                            for (int i = 0; i < a.length; i++) b[i] = a[i]-1* 5000 * 2.5 / 50.0; // b scales from a
                             updateGraph(new double[][]{ linspace(1.0, b.length, b.length), b }, // output
-                                        new double[][]{ linspace(1.0, n.length, l.length), n }); // supposed input
+                                    new double[][]{ linspace(1.0, n.length, l.length), n }); // supposed input
+                            int z = 0;
                         }
 
                         return true;
@@ -410,3 +411,4 @@ public class DacAdcView extends DriverFragment {
     }
 
 }
+

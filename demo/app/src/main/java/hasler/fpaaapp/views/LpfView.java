@@ -291,7 +291,7 @@ public class LpfView extends DriverFragment {
                             double[] b = new double[a.length];
                             for (int i = 0; i < a.length; i++) b[i] = (a[i] - 5000) * 2.5 / 5000.0;
                             updateGraph(new double[][]{ linspace(1.0, b.length, b.length), b },
-                                        new double[][]{ linspace(1.0, n.length, l.length), n });
+                                    new double[][]{ linspace(1.0, n.length, l.length), n });
                         }
 
                         return true;
@@ -376,7 +376,7 @@ public class LpfView extends DriverFragment {
 
             if (!driver.programData(data)) return false;
 
-            driver.sleep(1000);
+            driver.sleep(wait_ms);
             return true;
         }
 
@@ -427,3 +427,4 @@ public class LpfView extends DriverFragment {
     }
 
 }
+

@@ -3,11 +3,11 @@ package hasler.fpaaapp.utils;
 import android.util.Log;
 
 public abstract class GenericDriver {
-	/* -----------------------------------------------------------
-	 * GenericDriver class: Generic programs for interfacing with
-	 * openMSP430. To use it, implement the read and write methods
-	 * depending on the serial port.
-	 * ----------------------------------------------------------- */
+    /* -----------------------------------------------------------
+     * GenericDriver class: Generic programs for interfacing with
+     * openMSP430. To use it, implement the read and write methods
+     * depending on the serial port.
+     * ----------------------------------------------------------- */
 
     private final String TAG = "GenericDriver";
 
@@ -282,9 +282,9 @@ public abstract class GenericDriver {
         return Utils.reverse(readBurst(start_address, length));
     }
 
-	/* ----------------------------------
-	 * Below this line are helper methods
-	 * ---------------------------------- */
+    /* ----------------------------------
+     * Below this line are helper methods
+     * ---------------------------------- */
 
     /**
      * Get device: Enable auto-freeze and software breakpoints
