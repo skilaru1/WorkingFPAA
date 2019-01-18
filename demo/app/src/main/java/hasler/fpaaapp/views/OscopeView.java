@@ -324,7 +324,7 @@ public class OscopeView extends DriverFragment {
         final Button pauseButton = (Button) view.findViewById(R.id.pause_button);
         final TextView graphTitle = (TextView) view.findViewById(R.id.textView2);
         //title wiped, will be set during each button press
-        graphTitle.setText("Empty Title");
+        graphTitle.setText("Custom Design");
         graph = (GraphView) view.findViewById(R.id.graph);
         builder = new AlertDialog.Builder(getContext());
 
@@ -359,9 +359,17 @@ public class OscopeView extends DriverFragment {
                     @TargetApi(Build.VERSION_CODES.KITKAT)
                     @Override
                     public Boolean doInBackground(Void... params) {
+
                         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                        File file = new File(path, "dac_adc.zip");
-                        if (!download(file)) return null;
+                        String title = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
+                        File file = new File(path, title.concat(".zip"));
+                        //if file of the same name already exists, delete and redownload
+                        if (file.exists()) {
+                            file.delete();
+                        }
+                        if (!download(file)) {
+                            return null;
+                        }
 
                         if (!driver.connect()) return null;
 
@@ -809,15 +817,16 @@ public class OscopeView extends DriverFragment {
         protected boolean download(File file) {
             // Download the file if it doesn't exist
             if (!file.exists()) {
-                String url = Configuration.DAC_ADC_LOCATION;
+//                String url = Configuration.DAC_ADC_LOCATION;
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-                request.setTitle("DAC ADC");
-                request.setDescription("Downloading the DAC ADC programming file");
+                String title = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
+                request.setTitle(title);
+                request.setDescription("Downloading the ".concat(title).concat("file"));
 
                 request.allowScanningByMediaScanner();
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "dac_adc.zip");
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title.concat(".zip"));
 
                 DownloadManager manager = (DownloadManager) parentContext.getSystemService(Context.DOWNLOAD_SERVICE);
                 manager.enqueue(request);
